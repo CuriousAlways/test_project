@@ -1,0 +1,99 @@
+1. mkdir project1 project2
+
+2. cd project1
+
+3. git init
+   git checkout -b staging
+
+4. cat > test1.txt
+   ---- This is first commit ----
+   git add test1.txt
+   git commit -m '1st commit'
+
+5. git remote add origin git@github.com:CuriousAlways/test_project.git
+   git push origin staging
+
+6. cd ../project2
+
+7. git clone git@github.com:CuriousAlways/test_project.git
+
+8. git cd test_project 
+   git checkout staging
+
+9. cat > test1.txt
+   ---This is second commit---
+   
+10. git add test1.txt
+    git commit -m  '2nd commit'
+    git push origin staging
+
+11. cd ../../project1
+
+12. git checkout staging
+
+13. cat > test1.txt
+    ---This is third commit---
+
+14. git add test1.txt
+    git commit -m '3rd commit'
+    git push origin staging
+    --- 
+    Throws error as our local repo is not up to date
+    with remot repo. To resolve this issue we need to first
+    pull the changes and do conflict resolution and then again push our local changes 
+    ---
+    git pull origin staging
+    --- resolving conflict ---
+    git add test1.txt
+    git commit -m '4th commit'
+    git push origin staging
+
+15. git checkout -b master
+
+16. git merge staging
+
+17. git checkout -b testing
+
+18. cat > test1.txt
+    --- A is an alphabet ---
+    git add test1.txt
+    git commit -m '5th commit'
+
+19. --- repeat step 18, seven times ---
+
+20. git push origin testing
+
+21. git checkout master
+
+22. cat > test.txt
+    --- 1 is a number ---
+    git add test.txt
+    git commit -m '12th commit'
+
+23. --- repeat step 22, seven times ---
+
+24. git push origin master
+
+25. git checkout master
+    git rebase testing
+    --- resolve conflict ---
+    git add test.txt
+    git rebase --continue
+
+26. cd ../project2/test_project
+
+27. git checkout -b testing
+    git pull origin testing
+
+28. git checkout  master
+
+29. git merge testing
+    --- resolve conflict ---
+    git add test1.txt
+    git commit -m  '20th commit'
+
+30. master and testing branch were divergent. when the two branches were rebased in step
+    25 then all commits of master branch which were ahead of common base of master and testing, are attched after latest commits of testing branch. Though this process alters repository branch history but gives us more streamlined branch.
+
+    when master and testing branches were merged in step 29 being divergent branches a new commit is created with two parent one from master and other from testing branch.
+    Merging branches maintain repository branch history.
